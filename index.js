@@ -6,16 +6,24 @@ window.addEventListener('load', () => {
             long = position.coords.longitude;
             lat = position.coords.latitude;
 
+            if (position) {
+                setTimeout(() => {
+                    weathermothed.currentweather(long, lat);
+
+                }, 1000, () => {
+                    UI.getlocalweather();
+                }, 100);
+            }
+        }, () => {
+            console.log('denid');
+            alert('access location denied please activate location');
+            document.querySelector('#access_nif').style.display = 'inline';
         })
 
-        setTimeout(() => {
-            weathermothed.currentweather(long, lat);
 
-        }, 1000, () => {
-            UI.getlocalweather();
-        }, 100);
     }
 })
+
 
 //for local temeperature varibales 
 function varables(temp, humidity, country_name, description, icon, cuntryname) {
@@ -154,9 +162,7 @@ class weathermothed {
 
                 });
 
-            }).catch(error => {
-                alert('access location denid');
-            });
+            })
     }
 
     static searshweather(city) {
